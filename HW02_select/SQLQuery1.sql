@@ -116,8 +116,7 @@ select
 		year(b.InvoiceDate) as [Год продажи],
 		month(b.InvoiceDate) as [Месяц продажи],
 		avg(a.UnitPrice)as[Средняя цена],
-		sum(a.Quantity) as [Количество],
-		sum(a.UnitPrice) as [Общая стоимость]
+		sum(a.Quantity*a.UnitPrice) as [Общая стоимость]
 from
 			Sales.OrderLines a 
 		join Sales.Invoices b 
@@ -137,8 +136,7 @@ Order by year(b.InvoiceDate),month(b.InvoiceDate);
 select 
 		year(b.InvoiceDate) as [Год продажи],
 		month(b.InvoiceDate) as [Месяц продажи],
-		sum(a.Quantity) as [Количество],
-		sum(a.UnitPrice) as [Общая стоимость]
+		sum(a.Quantity*a.UnitPrice) as [Общая стоимость]
 from
 			Sales.OrderLines a
 		join Sales.Invoices b
@@ -162,6 +160,7 @@ Order by year(b.InvoiceDate),month(b.InvoiceDate)
 select   year(b.InvoiceDate) as [Год продажи],
 			MONTH(b.InvoiceDate) as [Месяц продажи],
 			a.Description as [Наименование товара],
+			sum(a.Quantity*a.UnitPrice) as [Сумма продаж],
 			min(b.InvoiceDate) as [Дата первой продажи],
 			sum(a.Quantity) as [Количество проданного]
 from 
